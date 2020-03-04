@@ -1,8 +1,11 @@
 package string;
-
+//从1开始，11（第一行是一个一），21（第二行是两个1），1211（第三行是1个2，1个1）
+//输入为n，给出第n行的字符串
 public class countAndSay {
     public static void main(String[] args){
-        System.out.print(solution_36(3));
+        String s = "dsadas ";
+        groupAnagram a = new groupAnagram();
+        System.out.println(a.sortString(s));
     }
     static String solution_36(int n){
         //if(n==1)return "1";
