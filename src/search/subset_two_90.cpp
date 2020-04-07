@@ -1,5 +1,5 @@
 class Solution {
-//含重复元素的组合
+//含重复元素的子集
 public:
     int n;
     vector<vector<int>> res;
