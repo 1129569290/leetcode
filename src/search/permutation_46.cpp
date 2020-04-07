@@ -1,5 +1,7 @@
 class Solution {
 public:
+
+//无重复元素的排列
     vector<vector<int>> res;
     void dfs(vector<int>& nums,vector<int>&outs,vector<bool>& f ,int level){
         if(level==nums.size()){
