@@ -1,5 +1,6 @@
 class Solution {
 public:
+//无重复元素的组合
     vector<vector<int>> subsets(vector<int>& nums) {
         vector<vector<int>> res;
         for(int i=0;i<(1<<nums.size());i++){、
