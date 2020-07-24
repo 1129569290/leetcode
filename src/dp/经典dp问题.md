@@ -36,3 +36,28 @@ for(int i=0; i<n ;i++){
             }
         }
    ```
+
+## 3. 正则表达式匹配
+
+思路: 应该从后向前匹配,关键是模式串和文本串最后的空格一定为true;
+
+1. 状态表示：dp[i][j] 模式串str从下标i到串结束位置 和匹配串pat从下标i到串结束位置的字串
+2. 属性 ：以上两个串是否能匹配
+3. 状态转移：如果str[i]==pat[j],则dp[i][j]=dp[i+1][j+1],如果pat[j+1]='*',那么dp[i][j]=dp[i][j+2]
+4. 代码：
+
+   ```c++
+   dp[i][j]=true; //两个串结尾的空串一定能匹配
+   for(int i = n;i>=0;i--)
+    for(int j=m-1; j>=0;j--){
+        bool firstMatch = i<n && (str[i]==pat[j]||pat[j]==*);
+        if(j+1 < m && pat[j+1] == '*'){
+            dp[i][j] = dp[i][j+2]||(firstMatch&&dp[i+1][j]//匹配0个或者多个 例如c a*c 或者aaac a*c
+        }else{
+            dp[i][j] = firtsMatch&&dp[i+1][j+1];//通常情况下，要保证之前已经匹配完成
+        }
+    }
+    return dp[0][0]
+
+
+   ```
