@@ -61,3 +61,35 @@ for(int i=0; i<n ;i++){
 
 
    ```
+
+## 4.编辑距离
+
+1. 状态表示：dp[i][j] 将串A的前i个字符变成串B的前j个字符需要多少次处理
+2. 状态转移：一共有三种处理方法,在三种处理方法里去最小值，假设正在处理A[i]和B[j]：
+   1. 删除 dp[i][j]=dp[i-1,j]+1
+   2. 替换 dp[i][j]=dp[i-1,j-1]+(A[i]!=B[j])
+   3. 插入 dp[i,j]=dp[i,j-1]+1
+3. 代码：
+
+   ```c++
+    class Solution {
+        public:
+        int minDistance(string word1, string word2) {
+            int n = word1.size(), m = word2.size();
+            if (!n || !m) return n + m;
+            vector<vector<int>>f = vector<vector<int>>(n + 1, vector<int>(m + 1));
+            f[0][0] = 0;
+            for (int i = 1; i <= n; i ++ ) f[i][0] = i;
+            for (int j = 1; j <= m; j ++ ) f[0][j] = j;
+            for (int i = 1; i <= n; i ++ )
+                for (int j = 1; j <= m; j ++ )
+                {
+                    f[i][j] = f[i - 1][j - 1] + (word1[i - 1] != word2[j - 1]);
+                    f[i][j] = min(f[i][j], f[i - 1][j] + 1);
+                    f[i][j] = min(f[i][j], f[i][j - 1] + 1);
+                }
+            return f[n][m];
+        }
+    };
+
+    ```
